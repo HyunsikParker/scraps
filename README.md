@@ -4,7 +4,11 @@
 greenhouse gas emissions and water it took to produce that food, which foods and habits matter most, and what one change
 would save in a year. Everything stays in your browser.
 
-Live demo: https://hyunsikparker.github.io/scraps/
+Live demo: https://hyunsikparker.github.io/scraps/ · Video walkthrough (1 min 14 s, captions):
+https://hyunsikparker.github.io/scraps/demo.html
+
+The video is recorded from the live page by `scripts/demo.mjs` (Playwright), which checks the numbers the narration
+quotes against the page as it records. The narration is a synthetic voice (Qwen3-TTS, run locally).
 
 ## The problem
 

@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.400 --> 00:00:02.909
+Scraps is a food-waste log for a household.
+
+00:00:02.909 --> 00:00:08.335
+You note what you throw away, and it shows the carbon and water it took to produce that food,
+
+00:00:08.335 --> 00:00:10.960
+so you can see which habit is worth changing.
+
+00:00:11.963 --> 00:00:15.887
+Logging takes a few taps: the food, how much, and why.
+
+00:00:15.887 --> 00:00:19.883
+Before you add it, Scraps shows what producing it took.
+
+00:00:20.886 --> 00:00:25.611
+Here is a made-up week for a household of two.
+
+00:00:25.611 --> 00:00:33.930
+2.03 kg of food thrown away took 14 kg CO2e and 1,259 litres of water to produce:
+
+00:00:33.930 --> 00:00:36.806
+about 106 kg of food a year.
+
+00:00:37.808 --> 00:00:43.530
+The biggest lever is beef: only 90 g, but 63% of the week's footprint.
+
+00:00:43.530 --> 00:00:48.598
+Wasting half as much for a year would avoid about 233 kg CO2e.
+
+00:00:48.598 --> 00:00:52.848
+The tips match the food, and the most common reason.
+
+00:00:53.849 --> 00:00:57.094
+The chart ranks foods by footprint, where beef leads.
+
+00:00:57.094 --> 00:01:00.889
+Switch it to weight, and milk and potatoes come first instead.
+
+00:01:01.892 --> 00:01:05.697
+The figures are global averages from Poore and Nemecek,
+
+00:01:05.697 --> 00:01:07.842
+published by Our World in Data.
+
+00:01:07.842 --> 00:01:12.132
+Scraps runs in your browser, and the log stays on this device.

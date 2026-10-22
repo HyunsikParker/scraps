@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; media-src 'self'; img-src 'self'; style-src 'sha256-BgjuwKpsEjWX6q4TQO/1weCFixswHL1vHGafd+/yggU='; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Scraps: demo video</title>
+  <style>:root { --paper: #f6f3ea; --ink: #1d231c; --muted: #59614f; --accent: #3a6b2e; color-scheme: light dark;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.55; color: var(--ink); background: var(--paper); }
+@media (prefers-color-scheme: dark) { :root { --paper: #151813; --ink: #e8ece3; --muted: #a5ad9b; --accent: #8fc77a; } }
+body { margin: 0; background: var(--paper); }
+main { max-width: 960px; margin: 0 auto; padding: 32px 16px 56px; }
+h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.15; margin: 0 0 8px; }
+h2 { font-size: 1.1rem; margin: 32px 0 8px; }
+p { margin: 0 0 12px; }
+.meta { color: var(--muted); margin-bottom: 20px; }
+video { display: block; width: 100%; height: auto; border-radius: 10px; background: #000; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; }
+a { color: var(--accent); text-underline-offset: 3px; font-weight: 600; }
+ol { padding-left: 1.3em; }
+li { margin-bottom: 10px; max-width: 70ch; }
+.fine { color: var(--muted); font-size: 0.9rem; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }</style>
+</head>
+<body>
+  <main>
+    <h1>Scraps: a walkthrough</h1>
+    <p class="meta">Logging food waste, then a made-up week for a household of two: the footprint, the biggest lever, and the ranking by footprint against weight. 1 min 14 s, narrated, with captions.</p>
+    <video controls preload="metadata" playsinline poster="demo.jpg" aria-describedby="transcript-title">
+      <source src="demo.mp4" type="video/mp4">
+      <track kind="captions" src="demo.vtt" srclang="en" label="English" default>
+      Your browser cannot play this video; the transcript below has the same narration.
+    </video>
+    <div class="links">
+      <a href="./">Open the app</a>
+      <a href="https://github.com/HyunsikParker/scraps">Source code</a>
+      <a href="demo.mp4" download>Download the video (MP4)</a>
+    </div>
+    <h2 id="transcript-title">Transcript</h2>
+    <ol>
+      <li>Scraps is a food-waste log for a household. You note what you throw away, and it shows the carbon and water it took to produce that food, so you can see which habit is worth changing.</li>
+      <li>Logging takes a few taps: the food, how much, and why. Before you add it, Scraps shows what producing it took.</li>
+      <li>Here is a made-up week for a household of two. 2.03 kg of food thrown away took 14 kg CO2e and 1,259 litres of water to produce: about 106 kg of food a year.</li>
+      <li>The biggest lever is beef: only 90 g, but 63% of the week&#x27;s footprint. Wasting half as much for a year would avoid about 233 kg CO2e. The tips match the food, and the most common reason.</li>
+      <li>The chart ranks foods by footprint, where beef leads. Switch it to weight, and milk and potatoes come first instead.</li>
+      <li>The figures are global averages from Poore and Nemecek, published by Our World in Data. Scraps runs in your browser, and the log stays on this device.</li>
+    </ol>
+    <p class="fine">Recorded from the live app with the built-in made-up example. The narration is a synthetic voice made with a
+      text-to-speech model (Qwen3-TTS); captions are on by default.</p>
+  </main>
+</body>
+</html>
