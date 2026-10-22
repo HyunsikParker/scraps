@@ -10,7 +10,6 @@
   --accent-soft: #e6efdf;
   --bar: #3a6b2e;
   --track: #ece7da;
-  --earth: #8c3f22;
   --radius: 16px;
   --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color-scheme: light;
@@ -33,7 +32,6 @@
     --accent-soft: #24331e;
     --bar: #5f9e4c;
     --track: #2a3025;
-    --earth: #e59a76;
     color-scheme: dark;
   }
 }
@@ -74,7 +72,7 @@ select { width: 100%; }
 .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .chip.is-on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 650; }
 .chip:focus-within { outline: 3px solid #c0640f; outline-offset: 2px; }
-.preview { margin: 4px 0 14px; padding: 10px 12px; border-left: 4px solid var(--earth); background: var(--paper); border-radius: 0 10px 10px 0; font-size: 0.95rem; }
+.preview { margin: 4px 0 14px; padding: 10px 12px; border: 1px solid var(--line); background: var(--paper); border-radius: 10px; font-size: 0.95rem; }
 .primary, .secondary { min-height: 48px; padding: 10px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; border: 2px solid var(--accent); }
 .primary { background: var(--accent); color: var(--accent-ink); }
 .secondary { background: transparent; }
