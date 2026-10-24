@@ -105,6 +105,20 @@ select { width: 100%; }
 .bar .fill { fill: var(--bar); }
 .bar-value { text-align: right; font-variant-numeric: tabular-nums; }
 .fine { font-size: 0.85rem; color: var(--muted); margin: 0; }
+.fine a { color: var(--accent); text-underline-offset: 3px; }
+.assumption { display: block; margin-top: 6px; font-size: 0.9em; color: var(--muted); }
+.log > .hint { margin-bottom: 16px; }
+.coverage-status { color: var(--muted); font-size: 0.9rem; margin: 0 0 12px; }
+.coverage { margin: 0 0 18px; }
+.coverage summary { cursor: pointer; font-weight: 600; }
+.coverage p { font-size: 0.9rem; }
+.coverage fieldset { border: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 4px 12px; }
+.coverage legend { margin-bottom: 8px; font-size: 0.9rem; }
+.coverage label { display: flex; align-items: center; gap: 8px; min-height: 44px; font-variant-numeric: tabular-nums; }
+.coverage input { width: 20px; height: 20px; accent-color: var(--accent); }
+.comparison { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; }
+.comparison p { margin: 0 0 8px; }
+.week > .fine { margin-bottom: 14px; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
 th { text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 8px; border-bottom: 1px solid var(--line); }

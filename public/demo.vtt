@@ -1,49 +1,25 @@
 WEBVTT
 
-00:00:00.400 --> 00:00:02.909
-Scraps is a food-waste log for a household.
+1
+00:00:00.060 --> 00:00:07.096
+Scraps logs edible food waste. All amounts in this walkthrough are made-up demonstration inputs.
 
-00:00:02.909 --> 00:00:08.335
-You note what you throw away, and it shows the carbon and water it took to produce that food,
+2
+00:00:07.096 --> 00:00:14.181
+The example week totals 2.03 kg. Emissions and water figures are estimates based on global averages.
 
-00:00:08.335 --> 00:00:10.960
-so you can see which habit is worth changing.
+3
+00:00:14.181 --> 00:00:21.191
+Beef leads by estimated emissions. The annual figure is a conditional scenario, not verified savings.
 
-00:00:11.962 --> 00:00:15.886
-Logging takes a few taps: the food, how much, and why.
+4
+00:00:21.191 --> 00:00:28.223
+Switch to weight: milk ranks first. The example never overwrites your personal log.
 
-00:00:15.886 --> 00:00:19.882
-Before you add it, Scraps shows what producing it took.
+5
+00:00:28.223 --> 00:00:35.371
+Demo inputs: 200 g of bread last week and 100 g this week. Unchecked days remain missing data.
 
-00:00:20.885 --> 00:00:25.610
-Here is a made-up week for a household of two.
-
-00:00:25.610 --> 00:00:33.929
-2.03 kg of food thrown away took 14 kg CO2e and 1,259 litres of water to produce:
-
-00:00:33.929 --> 00:00:36.805
-about 106 kg of food a year.
-
-00:00:37.807 --> 00:00:43.529
-The biggest lever is beef: only 90 g, but 63% of the week's footprint.
-
-00:00:43.529 --> 00:00:48.597
-Wasting half as much for a year would avoid about 233 kg CO2e.
-
-00:00:48.597 --> 00:00:52.847
-The tips match the food, and the most common reason.
-
-00:00:53.850 --> 00:00:57.095
-The chart ranks foods by footprint, where beef leads.
-
-00:00:57.095 --> 00:01:00.890
-Switch it to weight, and milk and potatoes come first instead.
-
-00:01:01.893 --> 00:01:05.698
-The figures are global averages from Poore and Nemecek,
-
-00:01:05.698 --> 00:01:07.843
-published by Our World in Data.
-
-00:01:07.843 --> 00:01:12.133
-Scraps runs in your browser, and the log stays on this device.
+6
+00:00:35.371 --> 00:00:44.837
+After confirming all 14 days, the demo shows 50% less recorded weight. This is not evidence of real-world impact.

@@ -1,6 +1,6 @@
 // The footprint of food that was thrown away, and what changing one habit would save over a year.
 
-import { FOOD_BY_ID, PRODUCTS, type Group, type Reason } from './foods'
+import { FOOD_BY_ID, PRODUCTS, REASONS, type Group, type Reason } from './foods'
 
 export interface Entry {
   id: string
@@ -20,8 +20,8 @@ export interface Footprint {
 export const UNEP_HOUSEHOLD_KG_PER_PERSON_YEAR = 79
 
 export function footprint(e: Pick<Entry, 'food' | 'grams'>): Footprint {
+  if (!Object.hasOwn(FOOD_BY_ID, e.food) || !Number.isFinite(e.grams) || e.grams <= 0) return { kg: 0, ghg: 0, water: 0 }
   const food = FOOD_BY_ID[e.food]
-  if (!food || !(e.grams > 0)) return { kg: 0, ghg: 0, water: 0 }
   const product = PRODUCTS[food.product]
   const productKg = e.grams / 1000 / (food.cookedFactor ?? 1)
   return { kg: e.grams / 1000, ghg: productKg * product.ghg, water: productKg * product.water }
@@ -61,10 +61,40 @@ export function addDays(day: string, n: number): string {
   return `${t.getUTCFullYear()}-${String(t.getUTCMonth() + 1).padStart(2, '0')}-${String(t.getUTCDate()).padStart(2, '0')}`
 }
 
+export function validDay(value: unknown): value is string {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const [year, month, day] = value.split('-').map(Number)
+  if (year < 1900) return false
+  const date = new Date(Date.UTC(year, month - 1, day))
+  return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day
+}
+
+export function validEntry(value: unknown): value is Entry {
+  if (!value || typeof value !== 'object') return false
+  const e = value as Entry
+  return typeof e.id === 'string' && e.id.length > 0 && typeof e.food === 'string' && Object.hasOwn(FOOD_BY_ID, e.food)
+    && Number.isFinite(e.grams) && e.grams >= 1 && e.grams <= 50_000 && validDay(e.date)
+    && REASONS.some((r) => r.id === e.reason)
+}
+
+/** Explicitly completed days include days with no waste; absence of an entry is not a zero. */
+export function completedInWindow(completed: string[], today: string, days = 7): string[] {
+  return Array.from({ length: days }, (_, i) => addDays(today, -i)).filter((d) => completed.includes(d))
+}
+
+export function compareWeeks(entries: Entry[], completed: string[], today: string) {
+  const current = summarize(entries, today)
+  const previousEnd = addDays(today, -7)
+  const previous = summarize(entries, previousEnd)
+  const ready = completedInWindow(completed, today).length === 7 && completedInWindow(completed, previousEnd).length === 7
+  const change = current.total.kg - previous.total.kg
+  return { current, previous, ready, change, percent: ready && previous.total.kg > 0 ? change / previous.total.kg * 100 : null }
+}
+
 /** Totals over the `days` days ending on `today` (inclusive). */
 export function summarize(entries: Entry[], today: string, days = 7): Summary {
   const from = addDays(today, -(days - 1))
-  const inRange = entries.filter((e) => e.date >= from && e.date <= today)
+  const inRange = entries.filter((e) => validEntry(e) && e.date >= from && e.date <= today)
   const foods = new Map<string, FoodTotal>()
   const reasons = new Map<Reason, ReasonTotal>()
   const groups: Partial<Record<Group, Footprint>> = {}
