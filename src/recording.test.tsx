@@ -117,7 +117,7 @@ describe('stored history', () => {
   })
   it('deduplicates ids and completed dates and rejects invalid household size', () => {
     const raw = JSON.stringify({ people: 2.5, entries: [entry(), entry({ grams: 300 }), entry({ id: 'bad', grams: null as unknown as number })], completedDays: [day, day, '2026-02-30'] })
-    expect(parseSaved(raw, day)).toEqual({ people: 2, entries: [entry()], completedDays: [day] })
+    expect(parseSaved(raw, day)).toEqual({ people: 2, entries: [entry()], completedDays: [] })
   })
   it('does not erase valid stored dates when the device clock moves backwards', () => {
     const tomorrow = addDays(day, 1)

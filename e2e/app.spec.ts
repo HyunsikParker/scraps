@@ -138,3 +138,49 @@ for (const colorScheme of ['light', 'dark'] as const) {
     await page.screenshot({ path: `test-results/scraps-desktop-${colorScheme}.png`, fullPage: true })
   })
 }
+
+test('damaged history reopens completion and cannot look like an environmental improvement', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 })
+  await page.addInitScript(() => {
+    if (localStorage.getItem('scraps.v2')) return
+    const d = new Date()
+    const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+    const offset = (n: number) => {
+      const date = new Date(`${today}T12:00:00Z`)
+      date.setUTCDate(date.getUTCDate() + n)
+      return date.toISOString().slice(0, 10)
+    }
+    localStorage.setItem('scraps.v2', JSON.stringify({ people: 2, completedDays: Array.from({ length: 14 }, (_, i) => offset(-i)), entries: [
+      { id: 'prior', food: 'bread', grams: 200, reason: 'off', date: offset(-7) },
+      { id: 'current', food: 'bread', grams: 100, reason: 'off', date: today },
+      { id: 'damaged', food: 'bread', grams: null, reason: 'off', date: today },
+    ] }))
+  })
+  const seen = watch(page)
+  await page.goto('/')
+  const today = await page.getByLabel('Day', { exact: true }).inputValue()
+  await expect(page.getByRole('status')).toContainText('Completed days affected by the missing records were reopened')
+  await expect(page.locator('.coverage-status')).toContainText('6 of 7 days marked complete')
+  await expect(page.locator('.totals')).toContainText('0.10 kg')
+  await expect(page.locator('.year')).toHaveCount(0)
+  await expect(page.locator('.comparison')).toContainText('Mark all 14 days complete')
+  await expect(page.locator('.comparison')).not.toContainText('lower')
+  const recovery = await page.evaluate(() => JSON.parse(localStorage.getItem('scraps.recovery')!))
+  expect(recovery.entries).toHaveLength(3)
+  expect(recovery.entries[2].grams).toBeNull()
+  await page.getByText('Mark completed days, including zero-waste days', { exact: true }).click()
+  await expect(page.getByRole('checkbox', { name: today, exact: true })).not.toBeChecked()
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await page.screenshot({ path: 'test-results/recovery-phone.png', fullPage: true })
+  await page.reload()
+  await expect(page.locator('.comparison')).toContainText('Mark all 14 days complete')
+  await page.getByRole('spinbutton', { name: 'grams', exact: true }).fill('900')
+  await page.getByRole('button', { name: 'Add to my log' }).click()
+  await page.getByText('Mark completed days, including zero-waste days', { exact: true }).click()
+  await page.getByRole('checkbox', { name: today, exact: true }).check()
+  await expect(page.locator('.comparison')).toContainText('0.80 kg more edible food recorded (400% higher)')
+  await expect(page.locator('.year')).toBeVisible()
+  expect(seen.errors).toEqual([])
+  expect(seen.requests).toEqual([])
+})

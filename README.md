@@ -29,15 +29,15 @@ Food-safety reminders link to [Food Standards Agency guidance](https://www.gov.u
 
 No account, upload or analytics is required. The application blocks network connections with `connect-src 'none'`; the hosting service still receives ordinary page requests. Entries, household size and completed dates stay in local storage under `scraps.v2`.
 
-Existing `scraps.v1` records are read without changing the original copy; legacy sample rows are excluded. Malformed v2 data is copied to `scraps.recovery` before replacement. Invalid rows are excluded with a warning. Storage failures are visible, and valid history is retained if a clock or timezone change makes it appear to be in the future. Such rows are excluded from the current window.
+Existing `scraps.v1` records are read without changing the original copy; legacy sample rows are excluded. Malformed v2 data is copied to `scraps.recovery` before replacement. Invalid or duplicate rows are excluded with a warning. Their dates are reopened for checking; if a discarded row has no valid date, all completion marks are reopened. Replace missing entries before marking those days complete again. This prevents missing records from being reported as zero waste or a reduction. Storage failures are visible, and valid history is retained if a clock or timezone change makes it appear to be in the future. Such rows are excluded from the current window.
 
 This is local browser storage, not a backup or sync service. Clearing site data removes it, and changes made while storage is unavailable may be lost.
 
 ## Validation
 
-`npm run check` passes 23 unit tests and 8 Chrome browser tests on the production build. They cover calculation and date boundaries, malformed storage, example isolation, missing versus zero-waste days, two-week comparisons, zero baselines, reloads, removal and save failures. Browser tests include keyboard submission, no unexpected network requests or console errors in the monitored flows, phone-width overflow checks, and axe accessibility scans in the tested light and dark states with no reported violations.
+`npm run check` passes 32 unit tests and 9 Chrome browser tests on the production build. They cover calculation and date boundaries, malformed storage, example isolation, missing versus zero-waste days, two-week comparisons, zero baselines, reloads, removal and save failures. Recovery checks cover known and unknown dates, conflicting duplicate IDs and preserved original bytes. In the tested recovery flow, the comparison remains unavailable after a reload and returns after the missing entry is replaced and the day is marked complete again. Browser tests include keyboard submission, no unexpected network requests or console errors in the monitored flows, phone-width overflow checks, and axe accessibility scans in the tested light and dark states with no reported violations.
 
-The walkthrough is a recording of the current local production build, with fictional inputs, captions and no narration. `scripts/demo.mjs` asserts the displayed results while recording. It replaces the original October 22 narrated walkthrough.
+The October 24 walkthrough records that version’s production build, with fictional inputs, captions and no narration. It shows the normal recording and comparison flow, not the October 30 recovery changes. `scripts/demo.mjs` asserts the displayed results while recording. It replaces the original October 22 narrated walkthrough.
 
 ## Run locally
 
@@ -57,7 +57,7 @@ The script creates a WebM recording, WebVTT captions and timing metadata. The pu
 
 ## Credits
 
-Built for Green Shift Hacks 2026, beginning October 22, 2026. Claude (Anthropic) assisted with the initial code, tests and documentation. Codex (OpenAI) assisted with the October 24 improvements, tests, recording script and documentation. The example and walkthrough inputs are fictional.
+Built for Green Shift Hacks 2026, beginning October 22, 2026. Claude (Anthropic) assisted with the initial code, tests and documentation. Codex (OpenAI) assisted with the October 24 improvements, tests, recording script and documentation, and the October 30 recovery fixes, tests and text updates. The example and walkthrough inputs are fictional.
 
 Data and context: Poore & Nemecek via Our World in Data (CC BY 4.0), UNEP, and the UK Food Standards Agency. Libraries: React, TypeScript and Vite; Vitest, Testing Library, Playwright and axe-core for tests.
 
