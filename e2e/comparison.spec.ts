@@ -1,0 +1,51 @@
+import AxeBuilder from '@axe-core/playwright'
+import { expect, test } from '@playwright/test'
+
+for (const colorScheme of ['light', 'dark'] as const) {
+  test(`food attribution in ${colorScheme}: opposing changes, keyboard, reload and coverage`, async ({ page }) => {
+    const errors: string[] = []
+    page.on('pageerror', e => errors.push(e.message))
+    await page.emulateMedia({ colorScheme })
+    await page.goto('/')
+    const today = await page.getByLabel('Day', { exact: true }).inputValue()
+    const d = new Date(`${today}T12:00:00Z`)
+    d.setUTCDate(d.getUTCDate() - 7)
+    await page.getByLabel('Day', { exact: true }).fill(d.toISOString().slice(0, 10))
+    await page.getByRole('spinbutton', { name: 'grams', exact: true }).fill('1000')
+    await page.getByRole('button', { name: 'Add to my log' }).click()
+    await page.getByLabel('Day', { exact: true }).fill(today)
+    await page.getByRole('combobox', { name: /^Food/ }).selectOption('beef')
+    await page.getByRole('spinbutton', { name: 'grams', exact: true }).fill('100')
+    await page.getByRole('button', { name: 'Add to my log' }).click()
+    await page.getByText('Mark completed days, including zero-waste days', { exact: true }).click()
+    for (const checkbox of await page.locator('.coverage input').all()) await checkbox.check()
+    const comparison = page.getByRole('region', { name: 'Did your recorded waste change?' })
+    await expect(comparison).toContainText('900 g less edible food recorded (90% lower)')
+    await expect(comparison).toContainText('8.38 kg CO2e higher')
+    await expect(comparison).toContainText('502.9 L lower')
+    const disclosure = page.getByText('See what changed by food', { exact: true })
+    await disclosure.focus()
+    await page.keyboard.press('Enter')
+    const list = page.locator('.food-change-list')
+    await expect(list.locator('li').first()).toContainText('Beef9.95 kg CO2e higher')
+    await expect(list.locator('li').last()).toContainText('Bread1.57 kg CO2e lower')
+    await page.getByLabel('Compare foods by').selectOption('water')
+    await expect(list.locator('li').first()).toContainText('Bread648 L lower')
+    await expect(list.locator('li').last()).toContainText('Beef145.1 L higher')
+    for (const width of [375, 768, 1280]) {
+      await page.setViewportSize({ width, height: 950 })
+      await comparison.scrollIntoViewIfNeeded()
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+      await comparison.screenshot({ path: `test-results/comparison-${colorScheme}-${width}.png` })
+    }
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+    await page.reload()
+    await expect(comparison).toContainText('8.38 kg CO2e higher')
+    await page.getByRole('button', { name: `Remove Beef from ${today}`, exact: true }).click()
+    await expect(comparison).toContainText('Mark all 14 days complete')
+    await expect(comparison.locator('.footprint-changes')).toHaveCount(0)
+    await page.getByRole('button', { name: 'Show a made-up example week' }).click()
+    await expect(comparison).toHaveCount(0)
+    expect(errors).toEqual([])
+  })
+}

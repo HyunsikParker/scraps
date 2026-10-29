@@ -9,7 +9,7 @@ Log edible food waste, see its estimated production footprint, and compare two c
 1. Record food in grams or approximate portions, with its date and the reason it was thrown away. The 29 choices use named dataset categories; for mixed meals, log the ingredients separately.
 2. Inspect weight, estimated production emissions and freshwater withdrawals for the last seven days. Tips address the leading food by estimated emissions and the leading reason by weight.
 3. Mark each day complete after recording all its edible food waste, including zero-waste days. Unchecked days remain missing data. Adding or removing a row reopens its day.
-4. Complete 14 days to compare two adjacent seven-day windows. A zero baseline has no percentage change. Annual scenarios stay hidden until the latest seven days are complete.
+4. Complete 14 days to compare two adjacent seven-day windows. See the change in recorded weight, estimated production emissions and freshwater withdrawals. Open **See what changed by food** to inspect increases and decreases, ranked by the metric you choose. A zero baseline has no percentage change. Annual scenarios stay hidden until the latest seven days are complete.
 
 The made-up example has its own temporary state. It uses two people by default, does not overwrite your log, and does not return when you reload.
 
@@ -23,6 +23,8 @@ Food weight comes from the amounts you enter. Production footprints use global a
 - Scraps tracks edible portions. [UNEP's 2024 household estimate](https://www.unep.org/resources/publication/food-waste-index-report-2024) includes inedible parts, so the app does not use it as a like-for-like performance benchmark.
 - A change between logs is not proof of emissions avoided or of a habit's effect. No household trial or measured environmental benefit is claimed.
 
+Less weight does not always mean a smaller production footprint. For a reproducible fictional check, record 1,000 g of bread in the previous week and 100 g of beef in the latest week, then mark all 14 days complete. Recorded weight is 90% lower, but estimated production emissions are 8.38 kg CO2e higher and freshwater withdrawals are 502.9 L lower. The food breakdown includes the increase for beef and the decrease for bread. These numbers illustrate the dataset calculation, not an observed household outcome. Both weeks use the same factors and cooked-weight assumptions.
+
 Food-safety reminders link to [Food Standards Agency guidance](https://www.gov.uk/government/publications/student-guide-to-food-safety-and-hygiene/student-guide-to-food-safety-and-hygiene). Follow local guidance and packaging instructions.
 
 ## Storage and privacy
@@ -35,9 +37,9 @@ This is local browser storage, not a backup or sync service. Clearing site data 
 
 ## Validation
 
-`npm run check` passes 32 unit tests and 9 Chrome browser tests on the production build. They cover calculation and date boundaries, malformed storage, example isolation, missing versus zero-waste days, two-week comparisons, zero baselines, reloads, removal and save failures. Recovery checks cover known and unknown dates, conflicting duplicate IDs and preserved original bytes. In the tested recovery flow, the comparison remains unavailable after a reload and returns after the missing entry is replaced and the day is marked complete again. Browser tests include keyboard submission, no unexpected network requests or console errors in the monitored flows, phone-width overflow checks, and axe accessibility scans in the tested light and dark states with no reported violations.
+`npm run check` passes 38 unit tests and 11 Chrome browser tests on the production build. They cover calculation and date boundaries, malformed storage, example isolation, missing versus zero-waste days, two-week comparisons, zero baselines, reloads, removal and save failures. Recovery checks cover known and unknown dates, conflicting duplicate IDs and preserved original bytes. In the tested recovery flow, the comparison remains unavailable after a reload and returns after the missing entry is replaced and the day is marked complete again. Footprint-comparison checks cover opposing metric changes, per-food reconciliation, cooked-weight conversion, tiny nonzero values and floating-point roundoff. Browser tests include keyboard submission and disclosure controls, no unexpected network requests or console errors in the monitored flows, phone-width overflow checks, and axe accessibility scans in the tested light and dark states with no reported violations.
 
-The October 24 walkthrough records that version’s production build, with fictional inputs, captions and no narration. It shows the normal recording and comparison flow, not the October 30 recovery changes. `scripts/demo.mjs` asserts the displayed results while recording. It replaces the original October 22 narrated walkthrough.
+The October 24 walkthrough records that version’s production build, with fictional inputs, captions and no narration. It shows the normal recording and weight-comparison flow, not the October 30 recovery and footprint-comparison changes. `scripts/demo.mjs` asserts the displayed results while recording. It replaces the original October 22 narrated walkthrough.
 
 ## Run locally
 
@@ -57,7 +59,7 @@ The script creates a WebM recording, WebVTT captions and timing metadata. The pu
 
 ## Credits
 
-Built for Green Shift Hacks 2026, beginning October 22, 2026. Claude (Anthropic) assisted with the initial code, tests and documentation. Codex (OpenAI) assisted with the October 24 improvements, tests, recording script and documentation, and the October 30 recovery fixes, tests and text updates. The example and walkthrough inputs are fictional.
+Built for Green Shift Hacks 2026, beginning October 22, 2026. Claude (Anthropic) assisted with the initial code, tests and documentation. Codex (OpenAI) assisted with the October 24 improvements, tests, recording script and documentation, and the October 30 recovery fixes, footprint comparisons, tests and text updates. The example and walkthrough inputs are fictional.
 
 Data and context: Poore & Nemecek via Our World in Data (CC BY 4.0), UNEP, and the UK Food Standards Agency. Libraries: React, TypeScript and Vite; Vitest, Testing Library, Playwright and axe-core for tests.
 

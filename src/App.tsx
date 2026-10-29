@@ -3,6 +3,7 @@ import { FOOD_BY_ID, FOODS, PRODUCTS, REASONS, type Reason } from './foods'
 import { addDays, compareWeeks, completedInWindow, footprint, isoDay, perYear, summarize, validDay, type Entry, type Summary } from './impact'
 import { GROUP_TIPS, REASON_TIPS } from './tips'
 import { loadLog, saveLog, type Saved } from './storage'
+import Comparison from './Comparison'
 type Measure = 'ghg' | 'water' | 'kg'
 
 function today(): string {
@@ -177,15 +178,7 @@ export default function App() {
           {week.foods.length ? <Week summary={week} complete={daysComplete === 7} people={example ? examplePeople : state.people} measure={measure} setMeasure={setMeasure} setPeople={(people) => example ? setExamplePeople(people) : setState((s) => ({ ...s, people }))} /> : (
             <p className="empty">{daysComplete === 7 ? 'You marked all 7 days complete with no edible food waste recorded.' : 'Nothing logged in the last 7 days yet. Add what you throw away, or look at the example week.'}</p>
           )}
-          {!example && <div className="comparison">
-            <h3>Did your recorded waste change?</h3>
-            {comparison.ready ? <>
-              <p>Previous week: <strong>{fmt(comparison.previous.total.kg, 2)} kg</strong>. Latest week: <strong>{fmt(comparison.current.total.kg, 2)} kg</strong>.</p>
-              <p>{comparison.change === 0 ? 'The recorded weight is unchanged.' : <>{fmt(Math.abs(comparison.change), 2)} kg {comparison.change < 0 ? 'less' : 'more'} edible food recorded
-                {comparison.percent !== null ? ` (${fmt(Math.abs(comparison.percent), 1)}% ${comparison.change < 0 ? 'lower' : 'higher'})` : '; no percentage is calculated from a zero baseline'}.</>}</p>
-              <p className="fine">This compares your logs, not proven emissions savings. Changes in household size, meals or recording can affect the result.</p>
-            </> : <p>Mark all 14 days complete to compare this week with the previous one. Missing days do not count as reductions.</p>}
-          </div>}
+          {!example && <Comparison comparison={comparison} />}
         </section>
       </main>
 

@@ -118,6 +118,22 @@ select { width: 100%; }
 .coverage input { width: 20px; height: 20px; accent-color: var(--accent); }
 .comparison { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; }
 .comparison p { margin: 0 0 8px; }
+.comparison .comparison-dates { margin-bottom: 12px; }
+.footprint-changes { margin: 16px 0; border-block: 1px solid var(--line); }
+.footprint-changes > div { padding: 12px 0; }
+.footprint-changes > div + div { border-top: 1px solid var(--line); }
+.footprint-changes dt { font-size: 0.85rem; color: var(--muted); }
+.footprint-changes dd { margin: 4px 0 0; }
+.footprint-changes dd span { display: block; font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+.comparison-context { font-weight: 550; }
+.food-changes { margin-top: 16px; }
+.food-changes summary { cursor: pointer; font-weight: 600; padding: 8px 0; }
+.food-changes .field { margin: 10px 0; }
+.food-changes select { width: 100%; min-width: 0; }
+.food-change-list { list-style: none; margin: 12px 0 0; padding: 0; }
+.food-change-list li { padding: 10px 0; border-top: 1px solid var(--line); }
+.food-change-list li > div { display: flex; justify-content: space-between; gap: 6px 14px; flex-wrap: wrap; }
+.food-change-list li p { font-size: 0.85rem; color: var(--muted); margin: 3px 0 0; }
 .week > .fine { margin-bottom: 14px; }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }

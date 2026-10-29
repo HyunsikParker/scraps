@@ -1,4 +1,4 @@
-// The footprint of food that was thrown away, and what changing one habit would save over a year.
+// Estimated production footprints of recorded food waste; comparisons are not verified savings.
 
 import { FOOD_BY_ID, PRODUCTS, REASONS, type Group, type Reason } from './foods'
 
@@ -87,8 +87,26 @@ export function compareWeeks(entries: Entry[], completed: string[], today: strin
   const previousEnd = addDays(today, -7)
   const previous = summarize(entries, previousEnd)
   const ready = completedInWindow(completed, today).length === 7 && completedInWindow(completed, previousEnd).length === 7
-  const change = current.total.kg - previous.total.kg
-  return { current, previous, ready, change, percent: ready && previous.total.kg > 0 ? change / previous.total.kg * 100 : null }
+  const difference = (a: Footprint, b: Footprint): Footprint => {
+    // Equal totals can differ by floating-point noise when entries are grouped differently.
+    const delta = (x: number, y: number) => Math.abs(x - y) < 1e-9 ? 0 : x - y
+    return { kg: delta(a.kg, b.kg), ghg: delta(a.ghg, b.ghg), water: delta(a.water, b.water) }
+  }
+  const change = difference(current.total, previous.total).kg
+  const currentFoods = new Map(current.foods.map(f => [f.food, f]))
+  const previousFoods = new Map(previous.foods.map(f => [f.food, f]))
+  const foodChanges = ready ? [...new Set([...currentFoods.keys(), ...previousFoods.keys()])].map(food => {
+    const before = previousFoods.get(food) ?? ZERO
+    const after = currentFoods.get(food) ?? ZERO
+    return { food, previous: before, current: after, delta: difference(after, before) }
+  }) : []
+  return {
+    current, previous, ready, change,
+    percent: ready && previous.total.kg > 0 ? change / previous.total.kg * 100 : null,
+    delta: ready ? difference(current.total, previous.total) : null,
+    foodChanges,
+    periods: { previousFrom: addDays(today, -13), previousTo: previousEnd, currentFrom: addDays(today, -6), currentTo: today },
+  }
 }
 
 /** Totals over the `days` days ending on `today` (inclusive). */
