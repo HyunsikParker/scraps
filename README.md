@@ -39,7 +39,8 @@ This is local browser storage, not a backup or sync service. Clearing site data 
 
 `npm run check` passes 38 unit tests and 11 Chrome browser tests on the production build. They cover calculation and date boundaries, malformed storage, example isolation, missing versus zero-waste days, two-week comparisons, zero baselines, reloads, removal and save failures. Recovery checks cover known and unknown dates, conflicting duplicate IDs and preserved original bytes. In the tested recovery flow, the comparison remains unavailable after a reload and returns after the missing entry is replaced and the day is marked complete again. Footprint-comparison checks cover opposing metric changes, per-food reconciliation, cooked-weight conversion, tiny nonzero values and floating-point roundoff. Browser tests include keyboard submission and disclosure controls, no unexpected network requests or console errors in the monitored flows, phone-width overflow checks, and axe accessibility scans in the tested light and dark states with no reported violations.
 
-The October 24 walkthrough records that version’s production build, with fictional inputs, captions and no narration. It shows the normal recording and weight-comparison flow, not the October 30 recovery and footprint-comparison changes. `scripts/demo.mjs` asserts the displayed results while recording. It replaces the original October 22 narrated walkthrough.
+The October 30 walkthrough records the current production app, with fictional inputs, captions and no narration. Its 11 scenes show a two-week comparison where weight falls but estimated emissions rise, the food-level breakdown, reload persistence and a deliberately simulated damaged record. The recording script inserts that invalid row only into its fresh local test log. The video is not a household trial or evidence of environmental savings. `scripts/demo.mjs` checks the displayed results throughout recording. This replaces the October 24 video.
+
 
 ## Run locally
 
@@ -59,7 +60,7 @@ The script creates a WebM recording, WebVTT captions and timing metadata. The pu
 
 ## Credits
 
-Built for Green Shift Hacks 2026, beginning October 22, 2026. Claude (Anthropic) assisted with the initial code, tests and documentation. Codex (OpenAI) assisted with the October 24 improvements, tests, recording script and documentation, and the October 30 recovery fixes, footprint comparisons, tests and text updates. The example and walkthrough inputs are fictional.
+Built for Green Shift Hacks 2026, beginning October 22, 2026. Claude (Anthropic) assisted with the initial code, tests and documentation. Codex (OpenAI) assisted with the October 24 improvements, tests, recording script and documentation, and the October 30 recovery fixes, footprint comparisons, tests, walkthrough and text updates. The example and walkthrough inputs are fictional.
 
 Data and context: Poore & Nemecek via Our World in Data (CC BY 4.0), UNEP, and the UK Food Standards Agency. Libraries: React, TypeScript and Vite; Vitest, Testing Library, Playwright and axe-core for tests.
 

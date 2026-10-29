@@ -27,11 +27,11 @@ li { margin-bottom: 10px; max-width: 70ch; }
 <body>
   <main>
     <h1>Scraps: a walkthrough</h1>
-    <p class="meta">Current walkthrough · October 24, 2026 · about 45 seconds, captioned, without narration. All inputs are made-up demonstrations; no real-world waste or emissions reduction is claimed.</p>
+    <p class="meta">Current walkthrough · October 30, 2026 · about 85 seconds, captioned, without narration. All inputs are made-up demonstrations; no real-world waste or emissions reduction is claimed.</p>
     <video controls preload="metadata" playsinline poster="demo.jpg" aria-describedby="transcript-title">
       <source src="demo.mp4" type="video/mp4">
       <track kind="captions" src="demo.vtt" srclang="en" label="English" default>
-      Your browser cannot play this video; the transcript below has the same narration.
+      Your browser cannot play this video; the transcript below contains the captions.
     </video>
     <div class="links">
       <a href="./">Open the app</a>
@@ -40,14 +40,19 @@ li { margin-bottom: 10px; max-width: 70ch; }
     </div>
     <h2 id="transcript-title">Captions</h2>
     <ol>
-      <li>Scraps logs edible food waste. All amounts in this walkthrough are made-up demonstration inputs.</li>
-      <li>The example week totals 2.03 kg. Emissions and water figures are estimates based on global averages.</li>
-      <li>Beef leads by estimated emissions. The annual figure is a conditional scenario, not verified savings.</li>
-      <li>Switch to weight: milk ranks first. The example never overwrites your personal log.</li>
-      <li>Demo inputs: 200 g of bread last week and 100 g this week. Unchecked days remain missing data.</li>
-      <li>After confirming all 14 days, the demo shows 50% less recorded weight. This is not evidence of real-world impact.</li>
+      <li>Scraps records edible food waste. Every input in this walkthrough is fictional, not a household trial.</li>
+      <li>The separate example totals 2.03 kg. Its emissions and water figures use global production averages.</li>
+      <li>Beef leads by estimated emissions; milk leads by weight. The example does not overwrite the personal log.</li>
+      <li>Two fictional entries: 1,000 g of bread in the previous week and 100 g of beef in the latest week.</li>
+      <li>An unchecked day means missing data, not zero waste. Thirteen completed days are not enough for comparison.</li>
+      <li>After all 14 days are complete: 90% less weight, but 8.38 kg CO2e higher estimated production emissions.</li>
+      <li>Food-level changes explain the total: beef adds 9.95 kg CO2e, while bread falls by 1.57 kg CO2e. Values are rounded.</li>
+      <li>Water tells a different story: bread falls by 648 L and beef rises by 145.1 L, for a net 502.9 L decrease.</li>
+      <li>The two entries and completion marks survive a reload. These are changes in logs, not proven environmental savings.</li>
+      <li>Simulated damage: the recording script inserts an invalid saved row, then reloads. Scraps warns and reopens its day.</li>
+      <li>The comparison stays unavailable until the log is checked and completed again. This video verifies app behaviour, not household impact.</li>
     </ol>
-    <p class="fine">Recorded from the local production build with Playwright. The script checks the displayed results while recording. Captioned inputs include a fictional two-week comparison.</p>
+    <p class="fine">Recorded from the October 30 local production build with Playwright. The script checks displayed results throughout all 11 scenes. The damaged-record scene deliberately inserts an invalid row into a fresh, local test log; it is a simulated fault, not real data loss. No audio or narration is included.</p>
   </main>
 </body>
 </html>

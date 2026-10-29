@@ -1,25 +1,45 @@
 WEBVTT
 
 1
-00:00:00.060 --> 00:00:07.096
-Scraps logs edible food waste. All amounts in this walkthrough are made-up demonstration inputs.
+00:00:00.047 --> 00:00:06.147
+Scraps records edible food waste. Every input in this walkthrough is fictional, not a household trial.
 
 2
-00:00:07.096 --> 00:00:14.181
-The example week totals 2.03 kg. Emissions and water figures are estimates based on global averages.
+00:00:06.147 --> 00:00:12.286
+The separate example totals 2.03 kg. Its emissions and water figures use global production averages.
 
 3
-00:00:14.181 --> 00:00:21.191
-Beef leads by estimated emissions. The annual figure is a conditional scenario, not verified savings.
+00:00:12.286 --> 00:00:18.371
+Beef leads by estimated emissions; milk leads by weight. The example does not overwrite the personal log.
 
 4
-00:00:21.191 --> 00:00:28.223
-Switch to weight: milk ranks first. The example never overwrites your personal log.
+00:00:18.371 --> 00:00:25.915
+Two fictional entries: 1,000 g of bread in the previous week and 100 g of beef in the latest week.
 
 5
-00:00:28.223 --> 00:00:35.371
-Demo inputs: 200 g of bread last week and 100 g this week. Unchecked days remain missing data.
+00:00:25.915 --> 00:00:32.419
+An unchecked day means missing data, not zero waste. Thirteen completed days are not enough for comparison.
 
 6
-00:00:35.371 --> 00:00:44.837
-After confirming all 14 days, the demo shows 50% less recorded weight. This is not evidence of real-world impact.
+00:00:32.419 --> 00:00:42.496
+After all 14 days are complete: 90% less weight, but 8.38 kg CO2e higher estimated production emissions.
+
+7
+00:00:42.496 --> 00:00:50.614
+Food-level changes explain the total: beef adds 9.95 kg CO2e, while bread falls by 1.57 kg CO2e. Values are rounded.
+
+8
+00:00:50.615 --> 00:00:58.689
+Water tells a different story: bread falls by 648 L and beef rises by 145.1 L, for a net 502.9 L decrease.
+
+9
+00:00:58.689 --> 00:01:06.794
+The two entries and completion marks survive a reload. These are changes in logs, not proven environmental savings.
+
+10
+00:01:06.794 --> 00:01:15.901
+Simulated damage: the recording script inserts an invalid saved row, then reloads. Scraps warns and reopens its day.
+
+11
+00:01:15.901 --> 00:01:24.969
+The comparison stays unavailable until the log is checked and completed again. This video verifies app behaviour, not household impact.
